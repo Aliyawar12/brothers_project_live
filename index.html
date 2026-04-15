@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Broherz — Coming Soon</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    min-height:100vh;
+    background:#1a0a2e;
+    font-family:'Nunito',sans-serif;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .blob{position:fixed;border-radius:50%;filter:blur(90px);opacity:0.25;animation:blobFloat 12s ease-in-out infinite;}
+  .b1{width:600px;height:600px;background:#6b21a8;top:-200px;left:-150px;animation-delay:0s;}
+  .b2{width:500px;height:500px;background:#7e1d35;bottom:-150px;right:-100px;animation-delay:4s;}
+  .b3{width:350px;height:350px;background:#c2410c;top:40%;left:30%;animation-delay:8s;}
+  @keyframes blobFloat{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(30px,-30px) scale(1.08);}}
+  .grid-bg{
+    position:fixed;inset:0;
+    background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);
+    background-size:50px 50px;
+  }
+  .floaters{position:fixed;inset:0;pointer-events:none;overflow:hidden;}
+  .food{
+    position:absolute;font-size:28px;opacity:0;
+    animation:foodFloat linear infinite;
+  }
+  @keyframes foodFloat{
+    0%{transform:translateY(110vh) rotate(0deg);opacity:0;}
+    10%{opacity:0.5;}
+    90%{opacity:0.3;}
+    100%{transform:translateY(-10vh) rotate(360deg);opacity:0;}
+  }
+  .steam-wrap{display:flex;gap:8px;justify-content:center;margin-bottom:-10px;height:40px;}
+  .steam{
+    width:6px;height:30px;background:rgba(255,255,255,0.15);
+    border-radius:10px;
+    animation:steamUp 2s ease-in-out infinite;
+  }
+  .steam:nth-child(2){animation-delay:0.4s;height:22px;}
+  .steam:nth-child(3){animation-delay:0.8s;height:28px;}
+  .steam:nth-child(4){animation-delay:0.2s;height:20px;}
+  .steam:nth-child(5){animation-delay:0.6s;height:25px;}
+  @keyframes steamUp{
+    0%,100%{transform:translateY(0) scaleX(1);opacity:0.15;}
+    50%{transform:translateY(-12px) scaleX(1.4);opacity:0.35;}
+  }
+  .card{
+    position:relative;z-index:10;
+    text-align:center;
+    padding:3rem 2.5rem 2.5rem;
+    max-width:680px;width:100%;
+  }
+  .chef-wrap{
+    position:relative;
+    display:inline-block;
+    margin-bottom:0.5rem;
+    animation:chefBounce 3s ease-in-out infinite;
+  }
+  @keyframes chefBounce{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+  }
+  .chef-svg{width:120px;height:120px;}
+  .logo-area{margin-bottom:0.5rem;}
+  .logo{
+    font-size:clamp(3.5rem,10vw,5.5rem);
+    font-weight:900;
+    letter-spacing:-2px;
+    background:linear-gradient(135deg,#fff 0%,#f0abfc 40%,#fb923c 100%);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    line-height:1;
+    animation:logoShimmer 4s ease-in-out infinite alternate;
+  }
+  @keyframes logoShimmer{
+    from{filter:drop-shadow(0 0 15px rgba(192,38,211,0.5));}
+    to{filter:drop-shadow(0 0 35px rgba(251,146,60,0.6));}
+  }
+  .logo-sub{
+    font-size:0.75rem;letter-spacing:5px;text-transform:uppercase;
+    color:rgba(255,255,255,0.4);margin-top:4px;
+  }
+  .divider{
+    display:flex;align-items:center;gap:12px;
+    margin:1.5rem auto;max-width:400px;
+  }
+  .divider-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);}
+  .divider-icon{font-size:20px;animation:spin 6s linear infinite;}
+  @keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+  .tagline{
+    font-size:clamp(1rem,2.5vw,1.2rem);
+    color:rgba(255,255,255,0.6);
+    font-weight:400;
+    line-height:1.8;
+    margin-bottom:2rem;
+  }
+  .tagline strong{color:#fb923c;font-weight:700;}
+  .badge{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(124,28,237,0.15);
+    border:1px solid rgba(124,28,237,0.35);
+    color:#d8b4fe;
+    padding:0.5rem 1.4rem;border-radius:50px;
+    font-size:0.78rem;letter-spacing:2px;text-transform:uppercase;
+    animation:pulse 2.5s ease-in-out infinite;
+    margin-bottom:1.5rem;
+  }
+  .badge-dot{
+    width:8px;height:8px;border-radius:50%;
+    background:#a855f7;
+    animation:blink 1.5s ease-in-out infinite;
+  }
+  @keyframes blink{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.3;transform:scale(0.7);}}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(124,28,237,0.3);}50%{box-shadow:0 0 0 8px rgba(124,28,237,0);}}
+  .social-row{
+    display:flex;justify-content:center;gap:1rem;margin-top:1rem;
+  }
+  .soc-btn{
+    width:42px;height:42px;border-radius:50%;
+    background:rgba(255,255,255,0.07);
+    border:1px solid rgba(255,255,255,0.12);
+    display:flex;align-items:center;justify-content:center;
+    font-size:18px;cursor:pointer;text-decoration:none;
+    transition:background 0.3s,transform 0.2s;
+  }
+  .soc-btn:hover{background:rgba(255,255,255,0.15);transform:scale(1.1);}
+  .cooking-bar{
+    margin-top:2rem;
+    display:flex;align-items:center;gap:10px;
+    justify-content:center;
+    color:rgba(255,255,255,0.3);
+    font-size:0.78rem;letter-spacing:2px;text-transform:uppercase;
+  }
+  .bar-track{
+    width:160px;height:4px;
+    background:rgba(255,255,255,0.08);
+    border-radius:10px;overflow:hidden;
+  }
+  .bar-fill{
+    height:100%;width:0%;
+    background:linear-gradient(90deg,#7e22ce,#fb923c);
+    border-radius:10px;
+    animation:cookProgress 8s ease-in-out infinite;
+  }
+  @keyframes cookProgress{
+    0%{width:0%;}60%{width:85%;}80%{width:85%;}100%{width:0%;}
+  }
+</style>
+</head>
+<body>
+
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+<div class="blob b3"></div>
+<div class="grid-bg"></div>
+<div class="floaters" id="floaters"></div>
+
+<div class="card">
+
+  <div class="steam-wrap">
+    <div class="steam"></div>
+    <div class="steam"></div>
+    <div class="steam"></div>
+    <div class="steam"></div>
+    <div class="steam"></div>
+  </div>
+
+  <div class="chef-wrap">
+    <svg class="chef-svg" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="60" cy="42" rx="22" ry="6" fill="white" opacity="0.9"/>
+      <rect x="44" y="20" width="32" height="24" rx="8" fill="white" opacity="0.9"/>
+      <ellipse cx="60" cy="20" rx="14" ry="10" fill="white"/>
+      <circle cx="60" cy="60" r="22" fill="#FBBF24"/>
+      <circle cx="53" cy="56" r="3" fill="#1a0a2e"/>
+      <circle cx="67" cy="56" r="3" fill="#1a0a2e"/>
+      <circle cx="54" cy="55" r="1" fill="white"/>
+      <circle cx="68" cy="55" r="1" fill="white"/>
+      <path d="M52 66 Q60 73 68 66" stroke="#1a0a2e" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <ellipse cx="49" cy="65" rx="5" ry="3" fill="#fb923c" opacity="0.4"/>
+      <ellipse cx="71" cy="65" rx="5" ry="3" fill="#fb923c" opacity="0.4"/>
+      <rect x="44" y="42" width="32" height="5" rx="2" fill="#7e22ce" opacity="0.7"/>
+      <rect x="42" y="80" width="36" height="28" rx="10" fill="white" opacity="0.85"/>
+      <circle cx="60" cy="88" r="2" fill="#7e22ce" opacity="0.6"/>
+      <circle cx="60" cy="96" r="2" fill="#7e22ce" opacity="0.6"/>
+      <ellipse cx="34" cy="88" rx="8" ry="5" fill="white" opacity="0.85" transform="rotate(-30 34 88)"/>
+      <ellipse cx="86" cy="88" rx="8" ry="5" fill="white" opacity="0.85" transform="rotate(30 86 88)"/>
+      <line x1="90" y1="84" x2="106" y2="68" stroke="#fb923c" stroke-width="3" stroke-linecap="round"/>
+      <rect x="100" y="60" width="14" height="7" rx="2" fill="#fb923c" opacity="0.9" transform="rotate(-45 100 60)"/>
+    </svg>
+  </div>
+
+  <div class="logo-area">
+    <div class="logo">brotherz</div>
+    <div class="logo-sub">Fast Food Experience</div>
+  </div>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <span class="divider-icon">🍕</span>
+    <div class="divider-line"></div>
+  </div>
+
+  <p class="tagline">
+    Our chefs are in the kitchen crafting<br/>
+    something <strong>seriously delicious</strong> for you.<br/>
+    The wait will be worth every bite. 🔥
+  </p>
+
+  <div class="badge">
+    <div class="badge-dot"></div>
+    Kitchen is Open — Launching Soon
+  </div>
+
+  <div class="social-row">
+    <a class="soc-btn" href="#" title="Instagram">📸</a>
+    <a class="soc-btn" href="#" title="Facebook">📘</a>
+    <a class="soc-btn" href="#" title="TikTok">🎵</a>
+    <a class="soc-btn" href="#" title="WhatsApp">💬</a>
+  </div>
+
+  <div class="cooking-bar">
+    <span>Cooking</span>
+    <div class="bar-track"><div class="bar-fill"></div></div>
+    <span>Almost ready</span>
+  </div>
+
+</div>
+
+<script>
+  const foods = ['🍔','🍕','🍟','🌮','🍗','🧆','🥪','🍜','🧁','🥤'];
+  const floaters = document.getElementById('floaters');
+  for(let i=0;i<20;i++){
+    const el = document.createElement('div');
+    el.className = 'food';
+    el.textContent = foods[Math.floor(Math.random()*foods.length)];
+    el.style.left = Math.random()*100+'vw';
+    el.style.fontSize = (18+Math.random()*20)+'px';
+    el.style.animationDuration = (10+Math.random()*15)+'s';
+    el.style.animationDelay = (Math.random()*12)+'s';
+    floaters.appendChild(el);
+  }
+</script>
+</body>
+</html>
