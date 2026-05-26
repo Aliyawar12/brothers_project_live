@@ -3,366 +3,811 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Brotherz | Coming Soon</title>
-<meta name="description" content="Brotherz is coming soon. Live Together, Eat Together. Premium Fast Food — Okara."/>
+<title>Brotherz | Premium Fast Food — Okara</title>
+<meta name="description" content="Brotherz — Okara's boldest fast food. Burgers, Pizza, Wraps, Wings. Live Together, Eat Together. Order on WhatsApp: 0314 8884019"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet"/>
 <style>
+:root{
+  --purple:#6a2484;
+  --purple-dark:#3d0f57;
+  --purple-mid:#8b35ad;
+  --gold:#febe38;
+  --gold-dark:#c9940c;
+  --maroon:#5c2624;
+  --green:#36472e;
+  --cream:#fff9f0;
+  --text:#1c0a2e;
+  --radius:20px;
+}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html,body{height:100%;width:100%}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
 
-body{
-  min-height:100vh;
-  background:linear-gradient(145deg,#1f1330 0%,#2a1a3f 48%,#322047 100%);
-  color:#fff8ef;
-  font-family:'Montserrat',sans-serif;
-  overflow-x:hidden;
+/* ════════════════ FLOATING WA ════════════════ */
+.wa-float{position:fixed;bottom:26px;right:20px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.wa-tip{background:#fff;color:#111;padding:8px 14px;border-radius:14px 14px 3px 14px;font-size:.72rem;font-weight:700;box-shadow:0 4px 20px rgba(0,0,0,.16);white-space:nowrap;animation:tipPop .6s cubic-bezier(.34,1.56,.64,1) 2.2s both}
+@keyframes tipPop{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.wa-btn{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#25d366,#128c7e);display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 4px 22px rgba(37,211,102,.55);animation:waPulse 2.6s ease-in-out infinite;transition:transform .2s}
+.wa-btn:hover{transform:scale(1.12)}
+.wa-btn svg{width:32px;height:32px;fill:#fff}
+@keyframes waPulse{0%,100%{box-shadow:0 4px 22px rgba(37,211,102,.55)}50%{box-shadow:0 4px 36px rgba(37,211,102,.9),0 0 0 10px rgba(37,211,102,.1)}}
+
+/* ════════════════ NAV ════════════════ */
+nav{position:fixed;top:0;inset-inline:0;z-index:900;height:66px;display:flex;align-items:center;justify-content:space-between;padding:0 2.4rem;background:rgba(40,6,66,.92);backdrop-filter:blur(20px);border-bottom:2px solid var(--gold);transition:background .3s}
+.nav-logo{display:flex;align-items:center;gap:.7rem;text-decoration:none}
+.nav-logo-circle{width:40px;height:40px;border-radius:50%;background:#fff;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+.nav-logo-circle img{width:88%;height:auto}
+.nav-brand{font-family:'Bebas Neue',sans-serif;font-size:1.65rem;letter-spacing:3px;color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:1.8rem;list-style:none}
+.nav-links a{color:rgba(255,240,210,.8);text-decoration:none;font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--gold)}
+.nav-order{background:var(--gold);color:var(--purple-dark)!important;padding:.42rem 1.3rem;border-radius:999px;font-weight:900!important}
+.nav-order:hover{background:#fff!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:5px}
+.hamburger span{width:24px;height:2px;background:var(--gold);border-radius:2px;transition:all .3s}
+.mob-nav{display:none;position:fixed;top:66px;inset-inline:0;z-index:899;background:rgba(40,6,66,.97);backdrop-filter:blur(18px);padding:1.4rem 2rem 2rem;border-bottom:2px solid var(--gold);flex-direction:column;gap:1rem}
+.mob-nav.open{display:flex}
+.mob-nav a{color:rgba(255,240,210,.85);text-decoration:none;font-size:.88rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:.55rem 0;border-bottom:1px solid rgba(255,255,255,.07)}
+@media(max-width:800px){.nav-links{display:none}.hamburger{display:flex}}
+
+/* ════════════════ HERO ════════════════ */
+.hero{min-height:100vh;background:linear-gradient(155deg,#280642 0%,var(--purple) 45%,#9b2aad 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 1.5rem 4rem;position:relative;overflow:hidden}
+.hero-pattern{position:absolute;inset:0;opacity:.04;background-image:repeating-linear-gradient(45deg,#fff 0,#fff 1px,transparent 0,transparent 50%);background-size:28px 28px}
+.hero-glow{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(254,190,56,.22) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.hero-open-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(254,190,56,.15);border:1.5px solid rgba(254,190,56,.6);color:var(--gold);font-size:.6rem;font-weight:800;letter-spacing:5px;text-transform:uppercase;padding:.4rem 1.4rem;border-radius:999px;margin-bottom:1.8rem;animation:fadeUp .7s ease both}
+.hero-open-badge .dot{width:7px;height:7px;border-radius:50%;background:#25d366;animation:blink 1.8s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+
+/* ── HERO LOGO FIX ── */
+.hero-logo{
+  width:clamp(120px,22vw,200px);
+  height:clamp(120px,22vw,200px);
+  object-fit:contain;
+  border-radius:50%;
+  background:#fff;
+  border:4px solid var(--gold);
+  box-shadow:0 0 0 8px rgba(254,190,56,.18),0 20px 60px rgba(0,0,0,.4);
+  margin-bottom:1.4rem;
+  animation:fadeUp .7s ease both,logoPulse 4s ease-in-out 1s infinite;
+  position:relative;
+  z-index:1;
+  padding:8px;
+}
+@keyframes logoPulse{
+  0%,100%{box-shadow:0 0 0 8px rgba(254,190,56,.18),0 20px 60px rgba(0,0,0,.4)}
+  50%{box-shadow:0 0 0 14px rgba(254,190,56,.28),0 20px 80px rgba(254,190,56,.25)}
 }
 
-/* Noise overlay */
-.noise{
-  position:fixed;inset:0;z-index:0;pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-  opacity:0.04;
-}
+.hero-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,18vw,10.5rem);line-height:.88;color:#fff;letter-spacing:6px;animation:fadeUp .7s .08s ease both;position:relative;z-index:1}
+.hero-h1 .gold{color:var(--gold)}
+.hero-sub{font-size:clamp(.95rem,2.4vw,1.25rem);color:rgba(255,240,200,.78);font-weight:600;letter-spacing:.5px;margin:1.1rem 0 .6rem;animation:fadeUp .7s .16s ease both}
+.hero-sub em{color:var(--gold);font-style:normal}
+.hero-loc{font-size:.62rem;letter-spacing:4px;text-transform:uppercase;color:rgba(255,240,200,.5);font-weight:700;margin-bottom:2.5rem;animation:fadeUp .7s .22s ease both}
+.hero-btns{display:flex;gap:.9rem;flex-wrap:wrap;justify-content:center;animation:fadeUp .7s .3s ease both;margin-bottom:3rem}
+.btn-gold{background:var(--gold);color:var(--purple-dark);padding:.88rem 2.2rem;border-radius:999px;font-weight:900;font-size:.75rem;letter-spacing:2px;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;box-shadow:0 8px 28px rgba(254,190,56,.45);transition:transform .2s,box-shadow .2s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(254,190,56,.65)}
+.btn-outline{background:transparent;color:#fff;padding:.88rem 2.2rem;border-radius:999px;font-weight:800;font-size:.75rem;letter-spacing:2px;text-transform:uppercase;text-decoration:none;border:2px solid rgba(255,255,255,.38);transition:border-color .2s,color .2s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+.hero-food-row{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;animation:fadeUp .7s .38s ease both}
+.food-pill{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:.5rem 1.1rem;font-size:.65rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,240,200,.75);display:flex;align-items:center;gap:.4rem;transition:background .2s,border-color .2s}
+.food-pill:hover{background:rgba(254,190,56,.15);border-color:rgba(254,190,56,.4);color:var(--gold)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
 
-/* Ambient glow */
-.ambient{
-  position:fixed;inset:0;z-index:1;pointer-events:none;
-  background:
-    radial-gradient(ellipse 780px 560px at 12% 8%,  rgba(126,74,189,0.48)  0%, transparent 70%),
-    radial-gradient(ellipse 560px 440px at 90% 88%, rgba(167,110,228,0.22)  0%, transparent 66%),
-    radial-gradient(ellipse 420px 380px at 50% 55%, rgba(255,194,110,0.1) 0%, transparent 72%);
-}
-
-.page{
-  position:relative;z-index:5;
-  min-height:100vh;
-  display:flex;flex-direction:column;
-}
-
-/* ── TICKER ── */
-.ticker{
-  width:100%;overflow:hidden;
-  padding:0.65rem 0;
-  border-bottom:1px solid rgba(238,190,120,0.22);
-  background:rgba(70,38,102,0.38);
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
-}
-.ticker-track{
-  width:max-content;white-space:nowrap;
-  animation:marquee 26s linear infinite;
-  display:flex;align-items:center;
-}
-.ticker-sep{
-  display:inline-block;width:1px;height:9px;
-  background:rgba(238,190,120,0.35);
-  margin:0 1.6rem;flex-shrink:0;
-}
-.ticker-track span{
-  font-family:'Montserrat',sans-serif;
-  color:rgba(245,205,143,0.82);
-  text-transform:uppercase;
-  letter-spacing:4px;
-  font-size:0.56rem;
-  font-weight:600;
-}
+/* ════════════════ TICKER ════════════════ */
+.ticker{background:var(--gold);overflow:hidden;padding:.6rem 0;border-top:3px solid var(--maroon);border-bottom:3px solid var(--maroon)}
+.ticker-wrap{display:flex;width:max-content;animation:marquee 22s linear infinite}
+.ticker-wrap span{font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:5px;color:var(--purple-dark);padding:0 1.6rem}
+.ticker-wrap .sep{color:var(--maroon);padding:0 .2rem}
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* ── HERO ── */
-.hero{
-  flex:1;
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  padding:3.5rem 1.5rem 2.5rem;
-  text-align:center;
-}
+/* ════════════════ SECTIONS ════════════════ */
+section{padding:5.5rem 1.5rem}
+.container{max-width:1120px;margin:0 auto}
+.sec-eyebrow{font-size:.58rem;letter-spacing:6px;text-transform:uppercase;font-weight:800;color:var(--purple);margin-bottom:.55rem;display:flex;align-items:center;gap:.7rem}
+.sec-eyebrow::before{content:'';width:26px;height:2.5px;background:var(--gold);border-radius:2px;flex-shrink:0}
+.sec-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,6vw,4rem);letter-spacing:3px;line-height:1;color:var(--text);margin-bottom:.4rem}
+.sec-title .ac{color:var(--purple)}
+.sec-title .acg{color:var(--gold-dark)}
+.sec-sub{font-size:.88rem;color:#666;line-height:1.65;max-width:520px;margin-bottom:2.5rem}
 
-/* Overline */
-.overline{
-  font-size:0.55rem;letter-spacing:7px;text-transform:uppercase;
-  color:rgba(245,203,136,0.7);font-weight:600;
-  margin-bottom:2.8rem;
-  display:flex;align-items:center;gap:1rem;
-}
-.overline::before,.overline::after{
-  content:'';flex:1;max-width:55px;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(245,203,136,0.45));
-}
-.overline::after{transform:scaleX(-1)}
+/* ════════════════ FEATURES STRIP ════════════════ */
+.features{background:var(--purple-dark);padding:3rem 1.5rem}
+.features-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;max-width:1120px;margin:0 auto}
+.feat{display:flex;flex-direction:column;align-items:center;text-align:center;padding:1.8rem 1.4rem;border-right:1px solid rgba(255,255,255,.08)}
+.feat:last-child{border-right:none}
+.feat-icon{font-size:2rem;margin-bottom:.7rem}
+.feat-title{font-size:.7rem;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem}
+.feat-desc{font-size:.72rem;color:rgba(255,240,200,.55);line-height:1.5}
+@media(max-width:700px){.features-grid{grid-template-columns:repeat(2,1fr)}.feat{border-right:none;border-bottom:1px solid rgba(255,255,255,.08)}}
 
-/* ── LOGO CARD — FIXED ── */
-.logo-wrap{
-  margin-bottom:2.4rem;
-  position:relative;
-  padding:2.4rem 2.8rem;
+/* ════════════════ MENU ════════════════ */
+.menu-sec{background:linear-gradient(170deg,#1e0336 0%,#340a50 100%);position:relative;overflow:hidden}
+.menu-sec::after{content:'';position:absolute;top:-80px;right:-80px;width:360px;height:360px;border-radius:50%;background:rgba(254,190,56,.06);pointer-events:none}
+.menu-sec .sec-eyebrow{color:var(--gold)}
+.menu-sec .sec-title{color:#fff}
+.menu-sec .sec-sub{color:rgba(255,240,200,.55)}
+.tabs{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.tab{padding:.52rem 1.3rem;border-radius:999px;border:2px solid rgba(255,255,255,.18);background:transparent;color:rgba(255,255,255,.55);font-family:'Outfit',sans-serif;font-size:.68rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all .2s}
+.tab:hover,.tab.on{background:var(--gold);border-color:var(--gold);color:var(--purple-dark)}
+.tab-panel{display:none}
+.tab-panel.on{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.3rem;animation:fadeUp .4s ease both}
+
+/* Menu Card */
+.mc{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.09);border-radius:22px;padding:1.4rem 1.3rem;display:flex;flex-direction:column;position:relative;overflow:hidden;transition:background .25s,transform .25s,border-color .25s;backdrop-filter:blur(8px)}
+.mc:hover{background:rgba(255,255,255,.1);transform:translateY(-5px);border-color:rgba(254,190,56,.4)}
+.mc-badge{position:absolute;top:11px;right:11px;background:var(--maroon);color:#fff;font-size:.48rem;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:.22rem .65rem;border-radius:999px}
+.mc-badge.hot{background:#e03030}
+.mc-badge.new{background:var(--green)}
+.mc-emoji{font-size:2.6rem;margin-bottom:.8rem;text-align:center}
+.mc-name{font-size:.95rem;font-weight:900;color:#fff;margin-bottom:.3rem;line-height:1.25}
+.mc-desc{font-size:.74rem;color:rgba(255,240,200,.55);line-height:1.55;flex:1;margin-bottom:1rem}
+.mc-foot{display:flex;align-items:center;justify-content:space-between;gap:.5rem;flex-wrap:wrap}
+.mc-price{font-family:'Bebas Neue',sans-serif;font-size:1.35rem;color:var(--gold);letter-spacing:1px;line-height:1}
+.mc-price small{font-family:'Outfit',sans-serif;font-size:.6rem;letter-spacing:1px;color:rgba(255,240,200,.5);display:block}
+.mc-btn{background:var(--gold);color:var(--purple-dark);border:none;cursor:pointer;padding:.42rem 1.1rem;border-radius:999px;font-size:.62rem;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;transition:background .2s,transform .2s;white-space:nowrap}
+.mc-btn:hover{background:#fff;transform:scale(1.04)}
+
+/* pizza grid variant */
+.tab-panel.pizza-panel{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+.mc-variants{display:flex;flex-wrap:wrap;gap:.35rem;margin:.6rem 0 .8rem}
+.mc-var{background:rgba(254,190,56,.12);border:1px solid rgba(254,190,56,.28);border-radius:8px;padding:.25rem .6rem;font-size:.62rem;font-weight:700;color:rgba(255,240,200,.75)}
+
+/* addons strip */
+.addons-strip{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1.2rem 1.4rem;margin-top:2rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.addons-strip .al{font-size:.6rem;font-weight:900;letter-spacing:3px;text-transform:uppercase;color:var(--gold);white-space:nowrap}
+.addon-tag{background:rgba(254,190,56,.12);border:1px solid rgba(254,190,56,.25);border-radius:999px;padding:.25rem .75rem;font-size:.65rem;font-weight:700;color:rgba(255,240,200,.72)}
+.meal-upgrade{background:rgba(254,190,56,.08);border:1.5px dashed rgba(254,190,56,.35);border-radius:16px;padding:1rem 1.4rem;margin-top:1rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.meal-upgrade p{font-size:.72rem;color:rgba(255,240,200,.7);line-height:1.5}
+.meal-upgrade strong{color:var(--gold)}
+
+/* ════════════════ SANDO SPOTLIGHT ════════════════ */
+.sando-spot{background:var(--cream);overflow:hidden;position:relative}
+.sando-spot::before{content:'SANDO';font-family:'Bebas Neue',sans-serif;font-size:22vw;letter-spacing:-2px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:rgba(106,36,132,.05);white-space:nowrap;pointer-events:none;z-index:0}
+.sando-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:1}
+.sando-left .badge-row{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.2rem}
+.sando-badge{background:var(--purple);color:#fff;font-size:.55rem;font-weight:900;letter-spacing:3px;text-transform:uppercase;padding:.28rem .8rem;border-radius:999px}
+.sando-badge.gold{background:var(--gold);color:var(--purple-dark)}
+.sando-tagline{font-family:'Playfair Display',serif;font-size:clamp(1.1rem,2.5vw,1.6rem);font-style:italic;color:var(--purple);line-height:1.4;margin:.8rem 0 1.2rem}
+.sando-desc{font-size:.88rem;color:#555;line-height:1.7;margin-bottom:1.8rem}
+.sando-price-row{display:flex;align-items:center;gap:1.2rem;margin-bottom:1.8rem}
+.sando-price{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--purple);letter-spacing:2px;line-height:1}
+.sando-price span{font-family:'Outfit',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#888;display:block}
+.sando-meal-tag{background:rgba(254,190,56,.15);border:1.5px dashed rgba(254,190,56,.5);border-radius:12px;padding:.5rem 1rem;font-size:.68rem;font-weight:700;color:var(--gold-dark)}
+.sando-right{display:flex;align-items:center;justify-content:center}
+
+/* ── SANDO IMAGE CARD ── */
+.sando-card{
+  background:linear-gradient(135deg,var(--purple) 0%,var(--purple-dark) 100%);
   border-radius:32px;
-
-  /* Clean light background so logo is always readable */
-  background: #ffffff;
-
-  /* Elegant border + shadow */
-  box-shadow:
-    0 0 0 1px rgba(245,203,136,0.38),
-    0 0 0 4px rgba(95,52,136,0.24),
-    0 32px 80px rgba(0,0,0,0.55),
-    0 0 60px rgba(245,203,136,0.18);
-
-  animation:logoFloat 5s ease-in-out infinite;
-}
-
-/* Subtle gold shimmer ring around the card */
-.logo-wrap::before{
-  content:'';
-  position:absolute;
-  inset:-2px;
-  border-radius:34px;
-  background: linear-gradient(135deg,
-    rgba(245,203,136,0.62) 0%,
-    rgba(255,226,170,0.24) 32%,
-    rgba(96,52,138,0.38) 64%,
-    rgba(245,203,136,0.55) 100%
-  );
-  z-index:-1;
-  pointer-events:none;
-}
-
-.logo-wrap img{
-  width:min(380px,72vw);
-  height:auto;
-  display:block;
-  /* No heavy drop shadow needed on white bg — just a clean subtle shadow */
-  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.12));
-}
-
-.logo-fallback{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(4rem,13vw,8.5rem);
-  font-weight:300;
-  letter-spacing:0.22em;
-  color:#481a54;
-  text-transform:uppercase;
-  line-height:1;
-}
-.logo-fallback em{color:#d4961a;font-style:italic}
-
-@keyframes logoFloat{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-9px)}
-}
-
-/* Divider */
-.divider{
-  display:flex;align-items:center;gap:1.2rem;
-  width:min(300px,75vw);
-  margin:0 auto 1.9rem;
-}
-.divider-line{
-  flex:1;
-  height:1px;
-  background:linear-gradient(90deg, rgba(245,203,136,0.06), rgba(245,203,136,0.45), rgba(245,203,136,0.06));
-}
-.divider-diamond{
-  width:6px;height:6px;
-  background:#f2be64;
-  transform:rotate(45deg);
-  flex-shrink:0;
-  box-shadow:0 0 10px rgba(242,190,100,0.6);
-}
-
-/* Tagline */
-.tagline{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(1.25rem,3.5vw,1.85rem);
-  font-weight:300;
-  font-style:italic;
-  color:rgba(255,243,228,0.78);
-  letter-spacing:0.06em;
-  margin-bottom:0.9rem;
-}
-
-/* Location */
-.location{
-  font-size:0.56rem;letter-spacing:5px;text-transform:uppercase;
-  color:rgba(241,198,126,0.74);font-weight:500;
-  margin-bottom:3rem;
-}
-
-/* Pills */
-.pill-row{
-  display:flex;align-items:center;gap:0.75rem;
-  flex-wrap:wrap;justify-content:center;
-  margin-bottom:3.2rem;
-}
-.pill{
-  display:inline-flex;align-items:center;gap:0.45rem;
-  padding:0.46rem 1.1rem;
-  border:1px solid rgba(140,90,192,0.55);
-  border-radius:999px;
-  background:rgba(68,37,98,0.44);
-  backdrop-filter:blur(6px);
-  font-size:0.54rem;letter-spacing:3.5px;text-transform:uppercase;
-  color:rgba(255,241,224,0.72);font-weight:500;
-}
-.pill-dot{
-  width:5px;height:5px;border-radius:50%;
-  background:#f2be64;
-  animation:blink 2.2s ease-in-out infinite;
-}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0.15}}
-
-/* Social links */
-.social-row{
-  display:flex;align-items:center;gap:1.4rem;
-}
-.social-link{
-  font-size:0.54rem;letter-spacing:3px;text-transform:uppercase;
-  color:rgba(255,241,224,0.62);
-  text-decoration:none;
-  font-weight:500;
-  padding-bottom:2px;
-  border-bottom:1px solid transparent;
-  transition:color 0.25s,border-color 0.25s;
-}
-.social-link:hover{
-  color:rgba(247,205,132,0.95);
-  border-color:rgba(247,205,132,0.45);
-}
-.social-sep{width:1px;height:10px;background:rgba(255,255,255,0.08)}
-
-/* ── FOOTER ── */
-footer{
-  padding:1.4rem 2rem;
-  display:flex;justify-content:space-between;align-items:center;
-  border-top:1px solid rgba(192,154,232,0.2);
-  flex-wrap:wrap;gap:0.8rem;
-}
-.foot-left{
-  display:flex;align-items:center;gap:0.9rem;
-}
-.foot-logo{
-  width:40px;height:40px;border-radius:999px;
-  background:#ffffff;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 10px 26px rgba(0,0,0,0.55), 0 0 0 1px rgba(245,203,136,0.35);
+  width:100%;
+  max-width:360px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:1rem;
+  box-shadow:0 24px 70px rgba(106,36,132,.35);
+  border:3px solid rgba(254,190,56,.35);
+  text-align:center;
+  padding:1.5rem 1.5rem 1.8rem;
   overflow:hidden;
 }
-.foot-logo img{
-  width:88%;height:auto;display:block;
+.sando-img-wrap{
+  width:100%;
+  border-radius:20px;
+  overflow:hidden;
+  aspect-ratio:4/3;
+  background:rgba(255,255,255,.07);
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
-.foot-brand{
-  font-family:'Cormorant Garamond',serif;
-  font-size:0.95rem;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;
-  color:rgba(255,241,224,0.64);
+.sando-img-wrap img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform .4s ease;
 }
-.foot-copy{
-  font-size:0.52rem;letter-spacing:2px;text-transform:uppercase;
-  color:rgba(255,241,224,0.45);
+.sando-card:hover .sando-img-wrap img{transform:scale(1.05)}
+/* Fallback if sando.png missing */
+.sando-img-wrap .sando-fallback{
+  font-size:5rem;
+  animation:sandoBounce 3s ease-in-out infinite;
+  display:none;
 }
+.sando-img-wrap img.errored{display:none}
+.sando-img-wrap img.errored + .sando-fallback{display:block}
+@keyframes sandoBounce{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-14px) rotate(3deg)}}
+.sando-card p{color:rgba(255,240,200,.75);font-size:.75rem;font-weight:700;letter-spacing:1px}
+.sando-card strong{color:var(--gold);font-size:1.1rem;display:block;margin-bottom:.2rem}
+@media(max-width:700px){.sando-inner{grid-template-columns:1fr}.sando-right{display:flex;justify-content:center}.sando-card{max-width:100%}}
 
-/* Fade-in stagger */
-.hero > *{animation:fadeIn 1s ease both}
-.hero > *:nth-child(1){animation-delay:0.08s}
-.hero > *:nth-child(2){animation-delay:0.20s}
-.hero > *:nth-child(3){animation-delay:0.34s}
-.hero > *:nth-child(4){animation-delay:0.44s}
-.hero > *:nth-child(5){animation-delay:0.54s}
-.hero > *:nth-child(6){animation-delay:0.64s}
-.hero > *:nth-child(7){animation-delay:0.74s}
-@keyframes fadeIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+/* ════════════════ WINGS & SIDES ════════════════ */
+.wings-sec{background:#fef5e4;position:relative;overflow:hidden}
+.wings-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.2rem;margin-top:2rem}
+.wing-card{background:#fff;border-radius:18px;padding:1.4rem 1.2rem;text-align:center;border:2px solid transparent;box-shadow:0 4px 20px rgba(106,36,132,.08);transition:border-color .25s,transform .25s}
+.wing-card:hover{border-color:var(--gold);transform:translateY(-4px)}
+.wing-card .icon{font-size:2.4rem;margin-bottom:.6rem}
+.wing-card h3{font-size:.82rem;font-weight:900;color:var(--purple);margin-bottom:.3rem}
+.wing-card .flavors{font-size:.68rem;color:#777;margin-bottom:.6rem;line-height:1.5}
+.wing-price{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;color:var(--maroon);letter-spacing:1px}
 
-/* ── MOBILE ── */
-@media(max-width:480px){
-  .hero{padding:2.2rem 1.2rem 1.8rem}
-  .overline{margin-bottom:1.8rem}
-  .logo-wrap{margin-bottom:1.8rem;padding:1.8rem 2rem}
-  .pill-row{gap:0.55rem}
-  .social-row{gap:1rem}
-  footer{flex-direction:column;text-align:center;align-items:center;padding:1.2rem 1rem}
-}
-@media(max-width:360px){
-  .pill{font-size:0.5rem;letter-spacing:2.5px;padding:0.42rem 0.85rem}
-}
+/* ════════════════ DESSERTS ════════════════ */
+.dessert-sec{background:linear-gradient(160deg,var(--purple-dark) 0%,#5a1080 100%)}
+.dessert-sec .sec-eyebrow{color:var(--gold)}
+.dessert-sec .sec-title{color:#fff}
+.dessert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.2rem;margin-top:2rem}
+.dc{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:1.5rem 1.2rem;text-align:center;transition:background .25s,transform .25s}
+.dc:hover{background:rgba(255,255,255,.13);transform:translateY(-4px)}
+.dc .icon{font-size:2.6rem;margin-bottom:.7rem}
+.dc h3{font-size:.9rem;font-weight:800;color:#fff;margin-bottom:.2rem}
+.dc p{font-size:.68rem;color:rgba(255,240,200,.5);margin-bottom:.7rem}
+.dc .price{font-family:'Bebas Neue',sans-serif;font-size:1.35rem;color:var(--gold);letter-spacing:1px}
+
+/* ════════════════ DRINKS ════════════════ */
+.drinks-sec{background:var(--cream)}
+.drinks-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1.2rem;margin-top:2rem}
+.drink-card{border-radius:18px;padding:1.5rem 1rem;text-align:center;border:2px solid transparent;transition:transform .2s,border-color .2s}
+.drink-card.crimson{background:linear-gradient(160deg,#7a1010,#c01515)}
+.drink-card.green{background:linear-gradient(160deg,#1a4a1a,#2a8c2a)}
+.drink-card.blue{background:linear-gradient(160deg,#0a2a6e,#1244cc)}
+.drink-card.shake{background:linear-gradient(160deg,var(--purple-dark),var(--purple))}
+.drink-card:hover{transform:translateY(-4px);border-color:var(--gold)}
+.drink-card .icon{font-size:2.6rem;margin-bottom:.5rem}
+.drink-card h3{font-size:.82rem;font-weight:900;color:#fff;margin-bottom:.2rem}
+.drink-card p{font-size:.68rem;color:rgba(255,255,255,.6);margin-bottom:.5rem}
+.drink-card .price{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--gold);letter-spacing:1px}
+
+/* ════════════════ ORDER CTA ════════════════ */
+.order-cta{background:var(--gold);text-align:center;padding:5rem 1.5rem;position:relative;overflow:hidden}
+.order-cta::before{content:'';position:absolute;top:-80px;left:-80px;width:320px;height:320px;border-radius:50%;background:rgba(106,36,132,.12)}
+.order-cta::after{content:'';position:absolute;bottom:-80px;right:-80px;width:320px;height:320px;border-radius:50%;background:rgba(106,36,132,.12)}
+.order-cta h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,7vw,5rem);color:var(--purple-dark);letter-spacing:4px;margin-bottom:.4rem;position:relative;z-index:1}
+.order-cta .sub{font-size:.9rem;color:var(--purple);font-weight:700;margin-bottom:2.2rem;position:relative;z-index:1}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+.btn-dark{background:var(--purple-dark);color:#fff;padding:.95rem 2.4rem;border-radius:999px;font-weight:900;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;text-decoration:none;box-shadow:0 8px 26px rgba(40,6,66,.4);transition:transform .2s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-dark:hover{transform:translateY(-3px)}
+.btn-wa{background:#25d366;color:#fff;padding:.95rem 2.4rem;border-radius:999px;font-weight:900;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;text-decoration:none;box-shadow:0 8px 26px rgba(37,211,102,.4);transition:transform .2s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-wa:hover{transform:translateY(-3px)}
+.btn-wa svg,.btn-dark svg{width:16px;height:16px;fill:#fff;flex-shrink:0}
+
+/* ════════════════ LOCATION ════════════════ */
+.location-sec{background:#fff9f0}
+.loc-inner{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;margin-top:3rem}
+.loc-list{display:flex;flex-direction:column;gap:1.5rem}
+.loc-item{display:flex;gap:1rem;align-items:flex-start}
+.loc-ic{width:48px;height:48px;border-radius:14px;background:var(--purple);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.loc-lbl{font-size:.55rem;letter-spacing:3px;text-transform:uppercase;color:var(--purple);font-weight:800;margin-bottom:.3rem}
+.loc-val{font-size:.88rem;font-weight:700;color:var(--text);line-height:1.6}
+.loc-val a{color:var(--purple);text-decoration:none;font-weight:800}
+.loc-val a:hover{color:var(--gold-dark)}
+.loc-map-card{background:linear-gradient(135deg,var(--purple),var(--purple-dark));border-radius:26px;aspect-ratio:4/5;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:1rem;padding:2.5rem;box-shadow:0 16px 56px rgba(106,36,132,.28);border:3px solid rgba(254,190,56,.4)}
+.loc-map-card .pin{font-size:3.5rem;animation:pinBounce 2.5s ease-in-out infinite}
+@keyframes pinBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.loc-map-card h3{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:#fff;letter-spacing:3px}
+.loc-map-card p{font-size:.78rem;color:rgba(255,240,200,.7);line-height:1.6}
+.loc-map-card a{background:var(--gold);color:var(--purple-dark);padding:.7rem 1.8rem;border-radius:999px;font-weight:900;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:transform .2s;margin-top:.4rem}
+.loc-map-card a:hover{transform:translateY(-2px)}
+@media(max-width:700px){.loc-inner{grid-template-columns:1fr}}
+
+/* ════════════════ SOCIAL STRIP ════════════════ */
+.social-strip{background:var(--purple-dark);padding:3rem 1.5rem;text-align:center}
+.social-strip h3{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--gold);letter-spacing:4px;margin-bottom:.5rem}
+.social-strip p{font-size:.8rem;color:rgba(255,240,200,.55);margin-bottom:2rem}
+.social-icons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.social-icon{display:flex;align-items:center;gap:.6rem;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);border-radius:999px;padding:.55rem 1.4rem;color:rgba(255,240,200,.75);text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;transition:background .2s,border-color .2s,color .2s}
+.social-icon:hover{border-color:var(--gold);color:var(--gold);background:rgba(254,190,56,.1)}
+.social-icon.insta:hover{background:rgba(225,48,108,.15);border-color:#e1306c;color:#e1306c}
+.social-icon.tiktok:hover{background:rgba(105,201,208,.15);border-color:#69c9d0;color:#69c9d0}
+.social-icon.fb:hover{background:rgba(24,119,242,.15);border-color:#1877f2;color:#1877f2}
+.si-svg{width:18px;height:18px;fill:currentColor;flex-shrink:0}
+
+/* ════════════════ FOOTER ════════════════ */
+footer{background:linear-gradient(160deg,#100020 0%,#280642 100%);padding:4rem 1.5rem 2rem}
+.foot-grid{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:3rem}
+.foot-brand-col .brand{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--gold);letter-spacing:5px;margin-bottom:.7rem}
+.foot-brand-col p{font-size:.78rem;color:rgba(255,240,200,.5);line-height:1.7;max-width:260px;margin-bottom:1.2rem}
+.foot-social{display:flex;gap:.6rem}
+.fs{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s}
+.fs:hover{background:var(--gold)}
+.fs svg{width:16px;height:16px;fill:rgba(255,240,200,.6)}
+.fs:hover svg{fill:var(--purple-dark)}
+.foot-col h4{font-size:.58rem;letter-spacing:4px;text-transform:uppercase;font-weight:800;color:var(--gold);margin-bottom:1.2rem}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.foot-col ul li{font-size:.78rem;color:rgba(255,240,200,.5)}
+.foot-col ul a{color:rgba(255,240,200,.5);text-decoration:none;transition:color .2s}
+.foot-col ul a:hover{color:var(--gold)}
+.foot-bottom{max-width:1120px;margin:0 auto;border-top:1px solid rgba(255,255,255,.07);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem}
+.foot-bottom p{font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,240,200,.3)}
+@media(max-width:700px){.foot-grid{grid-template-columns:1fr 1fr}.foot-brand-col{grid-column:span 2}}
+
+/* ════════════════ REVEAL ════════════════ */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.reveal.on{opacity:1;transform:none}
 </style>
 </head>
 <body>
 
-<div class="noise"></div>
-<div class="ambient"></div>
+<!-- ── FLOATING WHATSAPP ── -->
+<div class="wa-float">
+  <div class="wa-tip">🍔 Tap to order instantly!</div>
+  <a class="wa-btn" href="https://wa.me/923148884019?text=Hi%20Brotherz!%20I%20want%20to%20place%20an%20order%20%F0%9F%8D%94" target="_blank" rel="noopener" aria-label="Order on WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</div>
 
-<div class="page">
+<!-- ── NAV ── -->
+<nav>
+  <a class="nav-logo" href="#home">
+    <div class="nav-logo-circle"><img src="logoo.png" alt="Brotherz" onerror="this.style.display='none'"/></div>
+    <span class="nav-brand">Brotherz</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#sando">Sando</a></li>
+    <li><a href="#wings">Wings</a></li>
+    <li><a href="#desserts">Desserts</a></li>
+    <li><a href="#location">Find Us</a></li>
+    <li><a class="nav-order" href="https://wa.me/923148884019?text=Hi%20Brotherz!%20I%20want%20to%20order%20%F0%9F%8D%94" target="_blank">Order Now</a></li>
+  </ul>
+  <div class="hamburger" id="hbg" onclick="toggleNav()"><span></span><span></span><span></span></div>
+</nav>
+<div class="mob-nav" id="mobNav">
+  <a href="#menu" onclick="toggleNav()">Menu</a>
+  <a href="#sando" onclick="toggleNav()">Signature Sando</a>
+  <a href="#wings" onclick="toggleNav()">Wings & Sides</a>
+  <a href="#desserts" onclick="toggleNav()">Desserts</a>
+  <a href="#location" onclick="toggleNav()">Find Us</a>
+  <a href="https://wa.me/923148884019?text=Hi%20Brotherz!%20I%20want%20to%20order%20%F0%9F%8D%94" target="_blank" style="color:#25d366!important">📲 Order on WhatsApp</a>
+</div>
 
-  <!-- Ticker -->
-  <div class="ticker">
-    <div class="ticker-track">
-      <span>Brotherz</span><div class="ticker-sep"></div>
-      <span>Live Together, Eat Together</span><div class="ticker-sep"></div>
-      <span>Premium Fast Food</span><div class="ticker-sep"></div>
-      <span>Okara</span><div class="ticker-sep"></div>
-      <span>Opening Soon</span><div class="ticker-sep"></div>
-      <span>Brotherz</span><div class="ticker-sep"></div>
-      <span>Live Together, Eat Together</span><div class="ticker-sep"></div>
-      <span>Premium Fast Food</span><div class="ticker-sep"></div>
-      <span>Okara</span><div class="ticker-sep"></div>
-      <span>Opening Soon</span><div class="ticker-sep"></div>
+<!-- ── HERO ── -->
+<section class="hero" id="home">
+  <div class="hero-pattern"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-open-badge"><span class="dot"></span>Now Open in Okara</div>
+
+  <!-- LOGO — now has proper CSS so it shows up -->
+  <img src="logoo.png" alt="Brotherz" class="hero-logo" onerror="this.onerror=null;this.src='';this.style.display='none'"/>
+
+  <p class="hero-sub"><em>Live Together.</em> Eat Together. <em>Taste the Brotherhood.</em></p>
+  <p class="hero-loc">📍 M.A. Jinnah Road, Okara, Pakistan &nbsp;·&nbsp; Est. 2026</p>
+  <div class="hero-btns">
+    <a class="btn-gold" href="#menu">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+      See Full Menu
+    </a>
+    <a class="btn-outline" href="https://wa.me/923148884019?text=Hi%20Brotherz!%20I%20want%20to%20place%20an%20order%20%F0%9F%8D%94" target="_blank">
+      📲 Order on WhatsApp
+    </a>
+  </div>
+  <div class="hero-food-row">
+    <div class="food-pill">🍔 Burgerz</div>
+    <div class="food-pill">🥪 Sando</div>
+    <div class="food-pill">🌮 Wraps</div>
+    <div class="food-pill">🍕 Pizza</div>
+    <div class="food-pill">🍗 Wings</div>
+    <div class="food-pill">🍟 Sides</div>
+    <div class="food-pill">🍰 Desserts</div>
+  </div>
+</section>
+
+<!-- ── TICKER ── -->
+<div class="ticker">
+  <div class="ticker-wrap">
+    <span>Brotherz</span><span class="sep">✦</span>
+    <span>Premium Fast Food</span><span class="sep">✦</span>
+    <span>Live Together Eat Together</span><span class="sep">✦</span>
+    <span>Dine In · Takeaway · Delivery</span><span class="sep">✦</span>
+    <span>Okara Pakistan</span><span class="sep">✦</span>
+    <span>0314 8884019</span><span class="sep">✦</span>
+    <span>Order Now on WhatsApp</span><span class="sep">✦</span>
+    <span>Free Delivery</span><span class="sep">✦</span>
+    <span>Brotherz</span><span class="sep">✦</span>
+    <span>Premium Fast Food</span><span class="sep">✦</span>
+    <span>Live Together Eat Together</span><span class="sep">✦</span>
+    <span>Dine In · Takeaway · Delivery</span><span class="sep">✦</span>
+    <span>Okara Pakistan</span><span class="sep">✦</span>
+    <span>0314 8884019</span><span class="sep">✦</span>
+    <span>Order Now on WhatsApp</span><span class="sep">✦</span>
+    <span>Free Delivery</span><span class="sep">✦</span>
+  </div>
+</div>
+
+<!-- ── FEATURES ── -->
+<div class="features">
+  <div class="features-grid">
+    <div class="feat"><div class="feat-icon">🔥</div><div class="feat-title">Made Fresh</div><div class="feat-desc">Every order crafted fresh. No frozen shortcuts.</div></div>
+    <div class="feat"><div class="feat-icon">🛵</div><div class="feat-title">Free Delivery</div><div class="feat-desc">Hot to your door. Fast, free, no excuses.</div></div>
+    <div class="feat"><div class="feat-icon">👑</div><div class="feat-title">Premium Quality</div><div class="feat-desc">Finest ingredients. Brotherz-level standards.</div></div>
+    <div class="feat"><div class="feat-icon">📲</div><div class="feat-title">WhatsApp Order</div><div class="feat-desc">One message away. Zero hassle ordering.</div></div>
+  </div>
+</div>
+
+<!-- ── MENU ── -->
+<section class="menu-sec reveal" id="menu">
+  <div class="container">
+    <div class="sec-eyebrow">Our Menu</div>
+    <h2 class="sec-title">Craft Your <span class="acg">Perfect Meal.</span></h2>
+    <p class="sec-sub">Every item made with obsessive attention to flavour. Pick your weapon.</p>
+
+    <div class="tabs">
+      <button class="tab on" onclick="switchTab('burgerz',this)">🍔 Burgerz</button>
+      <button class="tab" onclick="switchTab('wraps',this)">🌮 Wraps</button>
+      <button class="tab" onclick="switchTab('pizza',this)">🍕 Pizza</button>
+      <button class="tab" onclick="switchTab('pasta',this)">🍝 Pasta</button>
+      <button class="tab" onclick="switchTab('drinks',this)">🥤 Drinks</button>
+    </div>
+
+    <!-- BURGERZ -->
+    <div class="tab-panel on" id="tp-burgerz">
+      <div class="mc"><div class="mc-badge hot">🔥 Best Seller</div><div class="mc-emoji">🍔</div><div class="mc-name">Brotherz Crunch</div><div class="mc-desc">The OG. Crispy crunch patty, signature sauce, fresh greens. The one that built the name.</div><div class="mc-foot"><div class="mc-price">Rs. 499<small>+ Meal upgrade +250</small></div><a class="mc-btn" href="https://wa.me/923148884019?text=Hi!%20I%20want%20to%20order%20the%20Brotherz%20Crunch%20burger%20%F0%9F%8D%94" target="_blank">Order</a></div></div>
+      <div class="mc"><div class="mc-emoji">🍗</div><div class="mc-name">Classic Fillet</div><div class="mc-desc">Tender chicken fillet, clean and classic. Choose Potato or Sesame bun. Timeless for a reason.</div><div class="mc-foot"><div class="mc-price">Rs. 449<small>+ Meal upgrade +250</small></div><a class="mc-btn" href="https://wa.me/923148884019?text=Hi!%20I%20want%20a%20Classic%20Fillet%20burger%20%F0%9F%8D%97" target="_blank">Order</a></div></div>
+      <div class="mc"><div class="mc-badge hot">🔥 Loaded</div><div class="mc-emoji">🤯</div><div class="mc-name">Double Crunch</div><div class="mc-desc">Double the crunch, double the chaos. For those who don't do "just one."</div><div class="mc-foot"><div class="mc-price">Rs. 799<small>+ Meal upgrade +250</small></div><a class="mc-btn" href="https://wa.me/923148884019?text=Hi!%20I%20want%20the%20Double%20Crunch%20burger%20%F0%9F%A4%AF" target="_blank">Order</a></div></div>
+      <div class="mc"><div class="mc-emoji">🧀</div><div class="mc-name">Double Fillet</div><div class="mc-desc">Two perfectly seasoned fillets stacked high. Cheese, sauce, premium bun. No compromises.</div><div class="mc-foot"><div class="mc-price">Rs. 699<small>+ Meal upgrade +250</small></div><a class="mc-btn" href="https://wa.me/923148884019?text=Hi!%20I%20want%20a%20Double%20Fillet%20burger%20%F0%9F%A7%80" target="_blank">Order</a></div></div>
+      <div class="mc"><div class="mc-badge new">NEW</div><div class="mc-emoji">🤝</div><div class="mc-name">Brotherz Duo</div><div class="mc-desc">Crunch + Fillet in one legendary burger. Because why choose? The ultimate crossover.</div><div class="mc-foot"><div class="mc-price">Rs. 749<small>+ Meal upgrade +250</small></div><a class="mc-btn" href="https://wa.me/923148884019?text=Hi!%20I%20want%20the%20Brotherz%20Duo%20burger%20%F0%9F%A4%9D" target="_blank">Order</a></div></div>
+      <div class="mc" style="grid-column:1/-1;background:rgba(254,190,56,.06);border-color:rgba(254,190,56,.25)">
+        <div class="mc-name" style="color:#fff;margin-bottom:.5rem">🍞 Choose Your Bun</div>
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:.8rem">
+          <span class="mc-var">🥔 Potato Bun (+40)</span>
+          <span class="mc-var">🥖 Sesame Bun (+40)</span>
+        </div>
+        <div class="mc-name" style="color:#fff;margin-bottom:.5rem">🥫 Choose Your Sauce</div>
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+          <span class="mc-var">Chipotle</span><span class="mc-var">Dynamite</span><span class="mc-var">Honey Mustard</span><span class="mc-var">Garlic Mayo</span><span class="mc-var">Smoky BBQ</span>
+        </div>
+      </div>
+      <div class="addons-strip" style="grid-column:1/-1">
+        <span class="al">Add Ons</span>
+        <span class="addon-tag">Sweet Corn +40</span>
+        <span class="addon-tag">Tomato +40</span>
+        <span class="addon-tag">Olives +50</span>
+        <span class="addon-tag">Jalapeños +50</span>
+        <span class="addon-tag">Cheese Slice +60</span>
+        <span class="addon-tag">Extra Sauce +70</span>
+      </div>
+      <div class="meal-upgrade" style="grid-column:1/-1">
+        <span style="font-size:1.5rem">🍟</span>
+        <p><strong>Make it a Meal — just +250 PKR!</strong><br>Add Fries + Drink + Dip Sauce to any burger. Best value in Okara.</p>
+      </div>
+    </div>
+
+    <!-- WRAPS -->
+    <div class="tab-panel" id="tp-wraps">
+      <div class="mc"><div class="mc-badge hot">Fan Fav</div><div class="mc-emoji">🌮</div><div class="mc-name">Creamy Wrap</div><div class="mc-desc">Grilled chicken, creamy house sauce, veggies, wrapped up tight. Smooth, rich, addictive.</div><div class="mc-foot"><div class="mc-price">Rs. 649<small>+ Meal upgrade +250</small></div><a class="mc-btn" href="https://wa.me/923148884019?text=Hi!%20I%20want%20a%20Creamy%20Wrap%20%F0%9F%8C%AE" target="_blank">Order</a></div></div>
+      <div class="mc"><div class="mc-emoji">🌯</div><div class="mc-name">Crispy Chicken Wrap</div><div class="mc-desc">Crunch meets wrap. Crispy chicken strips, tangy slaw, your choice of sauce. Bold every bite.</div><div class="mc-foot"><div class="mc-price">Rs. 599<small>+ Meal upgrade +250</small></div><a class="mc-btn" href="https://wa.me/923148884019?text=Hi!%20I%20want%20a%20Crispy%20Chicken%20Wrap%20%F0%9F%8C%AF" target="_blank">Order</a></div></div>
+      <div class="meal-upgrade" style="grid-column:1/-1">
+        <span style="font-size:1.5rem">🍟</span>
+        <p><strong>Make it a Meal — just +250 PKR!</strong><br>Add Fries + Drink + Dip Sauce to any wrap.</p>
+      </div>
+    </div>
+
+    <!-- PIZZA -->
+    <div class="tab-panel pizza-panel" id="tp-pizza">
+      <div class="mc"><div class="mc-emoji">🍕</div><div class="mc-name">Pan Crust</div><div class="mc-desc">The classic. Thick, fluffy base with a crispy bottom. Loaded with your fav toppings.</div><div class="mc-variants"><span class="mc-var">Small: 699</span><span class="mc-var">Med: 1,299</span><span class="mc-var">Large: 1,799</span></div><div class="mc-foot"><a class="mc-btn" href="https://wa.me/923148884019?text=Hi!%20I%20want%20to%20order%20a%20Pan%20Crust%20pizza%20%F0%9F%8D%95" target="_blank">Order</a></div></div>
+      <div class="mc"><div class="mc-badge hot">🔥 Loaded</div><div class="mc-emoji">🥙</div><div class="mc-name">Kebab Stuffer</div><div class="mc-desc">A crust stuffed with actual kebab. Bold, meaty, next level. Not your average pizza.</div><div class="mc-variants"><span class="mc-var">Med: 1,549</span><span class="mc-var">Large: 2,099</span></div><div class="mc-foot"><a class="mc-btn" href="https://wa.me/923148884019?text=Hi!%20I%20want%20a%20Kebab%20Stuffer%20pizza%20%F0%9F%8D%95" target="_blank">Order</a></div></div>
+      <div class="mc"><div class="mc-emoji">👑</div><div class="mc-name">Crown Crust</div><div class="mc-desc">The royal treatment. Crown-shaped crust stuffed with filling around the edge. Showstopper.</div><div class="mc-variants"><span class="mc-var">Med: 1,549</span><span class="mc-var">Large: 2,099</span></div><div class="mc-foot"><a class="mc-btn" href="https://wa.me/923148884019?text=Hi!%20I%20want%20a%20Crown%20Crust%20pizza%20%F0%9F%91%91" target="_blank">Order</a></div></div>
+      <div class="mc"><div class="mc-badge new">NEW</div><div class="mc-emoji">🧀</div><div class="mc-name">Cheese Stuffer</div><div class="mc-desc">Crust bursting with molten cheese. For the cheese obsessives. You know who you are.</div><div class="mc-variants"><span class="mc-var">Med: 1,599</span><span class="mc-var">Large: 2,099</span></div><div class="mc-foot"><a class="mc-btn" href="https://wa.me/923148884019?text=Hi!%20I%20want%20a%20Cheese%20Stuffer%20pizza%20%F0%9F%A7%80" target="_blank">Order</a></div></div>
+      <div class="mc" style="grid-column:1/-1;background:rgba(254,190,56,.05);border-color:rgba(254,190,56,.2)">
+        <div class="mc-name" style="color:#fff;margin-bottom:.6rem">🍅 Your Favourite Toppings</div>
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:.8rem">
+          <span class="mc-var">Brotherz Special</span><span class="mc-var">Chicken Supreme</span><span class="mc-var">Fajita Pizza</span><span class="mc-var">Tikka Pizza</span><span class="mc-var">Malai Boti</span><span class="mc-var">Behari Kabab</span><span class="mc-var">Kebab Lover</span><span class="mc-var">Cheese Lover</span><span class="mc-var">Veggie Lover</span>
+        </div>
+        <div class="addons-strip" style="margin-top:0;background:transparent;border:none;padding:0">
+          <span class="al">Add Ons</span>
+          <span class="addon-tag">Sweet Corn +40</span><span class="addon-tag">Tomato +40</span><span class="addon-tag">Olives +50</span><span class="addon-tag">Jalapeños +50</span><span class="addon-tag">Cheese Slice +70</span><span class="addon-tag">Extra Sauce +70</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PASTA -->
+    <div class="tab-panel" id="tp-pasta">
+      <div class="mc"><div class="mc-badge hot">Crispy</div><div class="mc-emoji">🍝</div><div class="mc-name">Crunchy Pasta</div><div class="mc-desc">Our signature crunchy baked pasta with crispy toppings and rich sauce. A meal in itself.</div><div class="mc-variants"><span class="mc-var">Half: 549</span><span class="mc-var">Full: 899</span></div><div class="mc-foot"><a class="mc-btn" href="https://wa.me/923148884019?text=Hi!%20I%20want%20the%20Crunchy%20Pasta%20%F0%9F%8D%9D" target="_blank">Order</a></div></div>
+      <div class="mc"><div class="mc-badge new">Creamy</div><div class="mc-emoji">🫕</div><div class="mc-name">Creamy Pasta</div><div class="mc-desc">Silky, rich, indulgent. Baked in a tray with a creamy sauce that coats every bite.</div><div class="mc-variants"><span class="mc-var">Half: 499</span><span class="mc-var">Full: 849</span></div><div class="mc-foot"><a class="mc-btn" href="https://wa.me/923148884019?text=Hi!%20I%20want%20the%20Creamy%20Pasta%20%F0%9F%AB%95" target="_blank">Order</a></div></div>
+    </div>
+
+    <!-- DRINKS tab -->
+    <div class="tab-panel" id="tp-drinks">
+      <div class="mc" style="background:linear-gradient(160deg,rgba(122,16,16,.6),rgba(192,21,21,.3))"><div class="mc-emoji">🔴</div><div class="mc-name">Crimson Red</div><div class="mc-desc">Bold, tangy, deep red. A Brotherz signature drink that stands out just like you.</div><div class="mc-foot"><div class="mc-price">Rs. 299</div><a class="mc-btn" href="https://wa.me/923148884019?text=Hi!%20I%20want%20a%20Crimson%20Red%20drink%20%F0%9F%94%B4" target="_blank">Order</a></div></div>
+      <div class="mc" style="background:linear-gradient(160deg,rgba(26,74,26,.6),rgba(42,140,42,.3))"><div class="mc-emoji">🟢</div><div class="mc-name">Green Phantom</div><div class="mc-desc">Cool, minty, mysterious green. The drink everyone asks "what's in it?" about.</div><div class="mc-foot"><div class="mc-price">Rs. 299</div><a class="mc-btn" href="https://wa.me/923148884019?text=Hi!%20I%20want%20a%20Green%20Phantom%20drink%20%F0%9F%9F%A2" target="_blank">Order</a></div></div>
+      <div class="mc" style="background:linear-gradient(160deg,rgba(10,42,110,.6),rgba(18,68,204,.3))"><div class="mc-emoji">🔵</div><div class="mc-name">Blue Nova</div><div class="mc-desc">Electrifying blue. Sweet, fizzy, vibrant. The one people post on Instagram first.</div><div class="mc-foot"><div class="mc-price">Rs. 299</div><a class="mc-btn" href="https://wa.me/923148884019?text=Hi!%20I%20want%20a%20Blue%20Nova%20drink%20%F0%9F%94%B5" target="_blank">Order</a></div></div>
+      <div class="mc"><div class="mc-emoji">🥤</div><div class="mc-name">Cold Drinks</div><div class="mc-desc">Pepsi, 7Up, Mirinda, Mountain Dew — chilled and ready.</div><div class="mc-foot"><div class="mc-price">Rs. 130<small>500ml</small></div><a class="mc-btn" href="https://wa.me/923148884019?text=Hi!%20I%20want%20a%20cold%20drink%20%F0%9F%A5%A4" target="_blank">Order</a></div></div>
+      <div class="mc"><div class="mc-emoji">💧</div><div class="mc-name">Water</div><div class="mc-desc">Brotherz mineral water. Stay hydrated, stay brotherly.</div><div class="mc-foot"><div class="mc-price">Rs. 79<small>500ml · 1.5L: 129</small></div><a class="mc-btn" href="https://wa.me/923148884019?text=Hi!%20I%20want%20water%20please" target="_blank">Order</a></div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── SANDO SPOTLIGHT ── -->
+<section class="sando-spot reveal" id="sando">
+  <div class="container">
+    <div class="sando-inner">
+      <div class="sando-left">
+        <div class="badge-row">
+          <span class="sando-badge gold">⭐ Signature Item</span>
+          <span class="sando-badge">Must Try</span>
+          <span class="sando-badge">Loudest Aroma</span>
+        </div>
+        <div class="sec-eyebrow">The Brotherz Sando</div>
+        <h2 class="sec-title">The Sandwich <span class="ac">That Rules</span> Okara.</h2>
+        <p class="sando-tagline">"Holding the title for loudest aroma in the game."</p>
+        <p class="sando-desc">Crispy fried chicken fillet, melted cheese, fresh lettuce — all pressed between toasted bread and served with a side of reputation. This isn't just a sandwich. This is a <strong>statement.</strong></p>
+        <div class="sando-price-row">
+          <div class="sando-price">749<span>PKR Only</span></div>
+          <div class="sando-meal-tag">🍟 Add Fries + Drink + Dip = <strong>+250 PKR</strong></div>
+        </div>
+        <div style="display:flex;gap:.9rem;flex-wrap:wrap">
+          <a class="btn-gold" href="https://wa.me/923148884019?text=Hi!%20I%20want%20to%20order%20the%20Brotherz%20Sando%20%F0%9F%A5%AA" target="_blank">Order the Sando</a>
+          <a class="btn-outline" style="color:var(--purple);border-color:rgba(106,36,132,.4);" href="https://wa.me/923148884019?text=Hi!%20I%20want%20Sando%20as%20a%20meal%20%F0%9F%A5%AA%2B%F0%9F%8D%9F%2B%F0%9F%A5%A4" target="_blank">Make it a Meal</a>
+        </div>
+      </div>
+      <div class="sando-right">
+        <div class="sando-card">
+          <!-- sando.png shown here; emoji fallback if image missing -->
+          <div class="sando-img-wrap">
+            <img
+              src="sando.png"
+              alt="The Brotherz Sando"
+              onerror="this.classList.add('errored')"
+            />
+            <div class="sando-fallback">🥪</div>
+          </div>
+          <div>
+            <strong>The Brotherz Sando</strong>
+            <p>Crispy · Cheesy · Legendary<br>Toasted bread. Fried fillet.<br>Okara's most talked-about bite.</p>
+          </div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--gold);letter-spacing:3px">RS. 749 PKR</div>
+        </div>
+      </div>
     </div>
   </div>
+</section>
 
-  <!-- Hero -->
-  <main class="hero">
-
-    <div class="overline">Est. 2026</div>
-
-    <div class="logo-wrap">
-      <img
-        src="logoo.png"
-        alt="Brotherz"
-        onerror="this.style.display='none';document.getElementById('logo-fallback').style.display='block'"
-      />
-      <div id="logo-fallback" style="display:none;" class="logo-fallback">
-        Brother<em>z</em>
+<!-- ── WINGS & SIDES ── -->
+<section class="wings-sec reveal" id="wings">
+  <div class="container">
+    <div class="sec-eyebrow">Hot Wings & Sides</div>
+    <h2 class="sec-title">Pick Your <span class="ac">Flavour.</span> Feel the Heat.</h2>
+    <p class="sec-sub">Four wing flavours. Nuggets. Masala Fries. Loaded Fries. Chicken Stuff Baked Potato. Your sides game just levelled up.</p>
+    <div class="wings-grid">
+      <div class="wing-card">
+        <div class="icon">🍗</div>
+        <h3>Crispy Chicken Wings</h3>
+        <div class="flavors">Classic crunch. Pure flavour.</div>
+        <div class="wing-price">5pc: 399 &nbsp;|&nbsp; 10pc: 649</div>
+        <a class="mc-btn" style="margin-top:.7rem;display:inline-block;background:var(--purple);color:#fff" href="https://wa.me/923148884019?text=Hi!%20I%20want%20Crispy%20Chicken%20Wings%20%F0%9F%8D%97" target="_blank">Order</a>
+      </div>
+      <div class="wing-card">
+        <div class="icon">🔥</div>
+        <h3>Korean BBQ Wings</h3>
+        <div class="flavors">Sweet, smoky, sticky. K-Drama levels of addictive.</div>
+        <div class="wing-price">5pc: 449 &nbsp;|&nbsp; 10pc: 699</div>
+        <a class="mc-btn" style="margin-top:.7rem;display:inline-block;background:var(--purple);color:#fff" href="https://wa.me/923148884019?text=Hi!%20I%20want%20Korean%20BBQ%20Wings%20%F0%9F%94%A5" target="_blank">Order</a>
+      </div>
+      <div class="wing-card">
+        <div class="icon">🌶️</div>
+        <h3>Sweet Thai Chilli</h3>
+        <div class="flavors">The perfect balance: sweet, tangy, with a lingering kick.</div>
+        <div class="wing-price">5pc: 499 &nbsp;|&nbsp; 10pc: 849</div>
+        <a class="mc-btn" style="margin-top:.7rem;display:inline-block;background:var(--purple);color:#fff" href="https://wa.me/923148884019?text=Hi!%20I%20want%20Sweet%20Thai%20Chilli%20Wings%20%F0%9F%8C%B6%EF%B8%8F" target="_blank">Order</a>
+      </div>
+      <div class="wing-card">
+        <div class="icon">🌋</div>
+        <h3>Buffalo Hot Wings</h3>
+        <div class="flavors">Nuclear level heat. For the brave only. Don't say we didn't warn you.</div>
+        <div class="wing-price">5pc: 499 &nbsp;|&nbsp; 10pc: 849</div>
+        <a class="mc-btn" style="margin-top:.7rem;display:inline-block;background:var(--maroon);color:#fff" href="https://wa.me/923148884019?text=Hi!%20I%20want%20Buffalo%20Hot%20Wings%20%F0%9F%8C%8B" target="_blank">Order</a>
+      </div>
+      <div class="wing-card">
+        <div class="icon">🟡</div>
+        <h3>Nuggets</h3>
+        <div class="flavors">Golden, bitesize, perfect. Classic nuggets the way they should be.</div>
+        <div class="wing-price">5 pcs: 449</div>
+        <a class="mc-btn" style="margin-top:.7rem;display:inline-block;background:var(--gold-dark);color:#fff" href="https://wa.me/923148884019?text=Hi!%20I%20want%20Nuggets%20%F0%9F%9F%A1" target="_blank">Order</a>
+      </div>
+      <div class="wing-card">
+        <div class="icon">🍟</div>
+        <h3>Masala Fries</h3>
+        <div class="flavors">Desi spice meets crispy fries. Impossible to stop at one serving.</div>
+        <div class="wing-price">Single: 249 &nbsp;|&nbsp; Family: 449</div>
+        <a class="mc-btn" style="margin-top:.7rem;display:inline-block;background:var(--gold-dark);color:#fff" href="https://wa.me/923148884019?text=Hi!%20I%20want%20Masala%20Fries%20%F0%9F%8D%9F" target="_blank">Order</a>
+      </div>
+      <div class="wing-card">
+        <div class="icon">🧀</div>
+        <h3>Loaded Fries</h3>
+        <div class="flavors">Fries under a mountain of cheese, sauce, toppings. The ultimate side.</div>
+        <div class="wing-price">Large: 499</div>
+        <a class="mc-btn" style="margin-top:.7rem;display:inline-block;background:var(--gold-dark);color:#fff" href="https://wa.me/923148884019?text=Hi!%20I%20want%20Loaded%20Fries%20%F0%9F%A7%80" target="_blank">Order</a>
+      </div>
+      <div class="wing-card">
+        <div class="icon">🥔</div>
+        <h3>Chicken Stuff Baked Potato</h3>
+        <div class="flavors">A whole baked potato stuffed with seasoned chicken. Comfort food reimagined.</div>
+        <div class="wing-price">Rs. 599</div>
+        <a class="mc-btn" style="margin-top:.7rem;display:inline-block;background:var(--purple);color:#fff" href="https://wa.me/923148884019?text=Hi!%20I%20want%20the%20Chicken%20Stuff%20Baked%20Potato%20%F0%9F%A5%94" target="_blank">Order</a>
       </div>
     </div>
-
-    <div class="divider">
-      <div class="divider-line"></div>
-      <div class="divider-diamond"></div>
-      <div class="divider-line"></div>
-    </div>
-
-    <p class="tagline">Live Together &nbsp;·&nbsp; Eat Together</p>
-
-    <p class="location">Coming Soon &nbsp;—&nbsp; Okara, Pakistan</p>
-
-    <div class="pill-row">
-      <div class="pill"><span class="pill-dot"></span>Opening Soon</div>
-      <div class="pill">Premium Fast Food</div>
-      <div class="pill">Dine In &amp; Takeaway</div>
-    </div>
-
-    <div class="social-row">
-      <a class="social-link" href="#">Instagram</a>
-      <div class="social-sep"></div>
-      <a class="social-link" href="#">Facebook</a>
-      <div class="social-sep"></div>
-      <a class="social-link" href="#">Contact</a>
-    </div>
-
-  </main>
-
-  <!-- Footer -->
-  <footer>
-    <div class="foot-left">
-      <div class="foot-logo">
-        <img src="logoo.png" alt="Brotherz small logo" onerror="this.style.display='none'"/>
+    <div style="margin-top:2rem;background:#fff;border-radius:20px;padding:1.5rem 1.8rem;box-shadow:0 4px 20px rgba(106,36,132,.08)">
+      <div style="font-size:.6rem;font-weight:900;letter-spacing:4px;text-transform:uppercase;color:var(--purple);margin-bottom:1rem">🥣 Dip Sauces — Rs. 70 Each</div>
+      <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+        <span class="addon-tag" style="background:rgba(106,36,132,.08);border-color:rgba(106,36,132,.2);color:var(--text)">Chipotle Sauce</span>
+        <span class="addon-tag" style="background:rgba(106,36,132,.08);border-color:rgba(106,36,132,.2);color:var(--text)">Dynamite Sauce</span>
+        <span class="addon-tag" style="background:rgba(106,36,132,.08);border-color:rgba(106,36,132,.2);color:var(--text)">Honey Mustard</span>
+        <span class="addon-tag" style="background:rgba(106,36,132,.08);border-color:rgba(106,36,132,.2);color:var(--text)">Garlic Mayo</span>
+        <span class="addon-tag" style="background:rgba(106,36,132,.08);border-color:rgba(106,36,132,.2);color:var(--text)">Smoky BBQ</span>
       </div>
-      <div class="foot-brand">Brotherz</div>
     </div>
-    <div class="foot-copy">© 2026 Brotherz &nbsp;·&nbsp; All Rights Reserved</div>
-  </footer>
+  </div>
+</section>
 
+<!-- ── DESSERTS ── -->
+<section class="dessert-sec reveal" id="desserts">
+  <div class="container">
+    <div class="sec-eyebrow">Sweet Endings</div>
+    <h2 class="sec-title" style="color:#fff">End on a <span class="acg">High Note.</span></h2>
+    <p class="sec-sub">Because every great meal deserves a legendary finish.</p>
+    <div class="dessert-grid">
+      <div class="dc"><div class="icon">🍫</div><h3>Molten Lava Cake</h3><p>Warm chocolate cake with a molten core. One cut and it flows.</p><div class="price">Rs. 599</div><a class="mc-btn" style="margin-top:.8rem;display:inline-block" href="https://wa.me/923148884019?text=Hi!%20I%20want%20the%20Molten%20Lava%20Cake%20%F0%9F%8D%AB" target="_blank">Order</a></div>
+      <div class="dc"><div class="icon">🍪</div><h3>Oreo Sundae</h3><p>Creamy vanilla ice cream loaded with crushed Oreo. Pure joy in a cup.</p><div class="price">Rs. 599</div><a class="mc-btn" style="margin-top:.8rem;display:inline-block" href="https://wa.me/923148884019?text=Hi!%20I%20want%20an%20Oreo%20Sundae%20%F0%9F%8D%AA" target="_blank">Order</a></div>
+      <div class="dc"><div class="icon">🌸</div><h3>Lotus Sundae</h3><p>Caramelised Lotus biscoff drizzled over smooth ice cream. Dangerously good.</p><div class="price">Rs. 599</div><a class="mc-btn" style="margin-top:.8rem;display:inline-block" href="https://wa.me/923148884019?text=Hi!%20I%20want%20a%20Lotus%20Sundae%20%F0%9F%8C%B8" target="_blank">Order</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ORDER CTA ── -->
+<div class="order-cta reveal">
+  <h2>Order Right Now.</h2>
+  <p class="sub">WhatsApp, call, walk in — we're ready. Hot food in your hands faster than you think. 🔥</p>
+  <div class="cta-btns">
+    <a class="btn-wa" href="https://wa.me/923148884019?text=Hi%20Brotherz!%20I%20want%20to%20place%20an%20order%20%F0%9F%8D%94" target="_blank">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp: 0314 8884019
+    </a>
+    <a class="btn-dark" href="tel:+923148884018">📞 0314 8884018</a>
+    <a class="btn-dark" href="tel:+923148884019">📞 0314 8884019</a>
+  </div>
 </div>
+
+<!-- ── LOCATION ── -->
+<section class="location-sec reveal" id="location">
+  <div class="container">
+    <div class="sec-eyebrow">Find Us</div>
+    <h2 class="sec-title">We're Right <span class="ac">Here.</span></h2>
+    <div class="loc-inner">
+      <div class="loc-list">
+        <div class="loc-item">
+          <div class="loc-ic">📍</div>
+          <div>
+            <div class="loc-lbl">Address</div>
+            <div class="loc-val">Jinnah, M.A Jinnah Road<br>Opposite PSO Pump MA Road<br>Okara, Pakistan</div>
+          </div>
+        </div>
+        <div class="loc-item">
+          <div class="loc-ic">📞</div>
+          <div>
+            <div class="loc-lbl">Call / WhatsApp</div>
+            <div class="loc-val">
+              <a href="tel:+923148884018">0314 8884018</a><br>
+              <a href="tel:+923148884019">0314 8884019</a><br>
+              <a href="https://wa.me/923148884019?text=Hi%20Brotherz!" target="_blank">💬 Chat on WhatsApp →</a>
+            </div>
+          </div>
+        </div>
+        <div class="loc-item">
+          <div class="loc-ic">🕐</div>
+          <div>
+            <div class="loc-lbl">Hours</div>
+            <div class="loc-val">Open Daily · 12:00 PM – 1:00 AM<br><span style="color:var(--purple);font-size:.8rem;font-weight:800">7 Days a Week · Free Delivery!</span></div>
+          </div>
+        </div>
+        <div class="loc-item">
+          <div class="loc-ic">🛵</div>
+          <div>
+            <div class="loc-lbl">Services</div>
+            <div class="loc-val">Dine In &nbsp;·&nbsp; Takeaway &nbsp;·&nbsp; Delivery</div>
+          </div>
+        </div>
+      </div>
+      <div class="loc-map-card">
+        <div class="pin">📍</div>
+        <h3>Brotherz</h3>
+        <p>M.A Jinnah Road<br>Opposite PSO Pump<br>Okara, Pakistan</p>
+        <a href="https://maps.google.com/?q=MA+Jinnah+Road+Opposite+PSO+Pump+Okara+Pakistan" target="_blank" rel="noopener">Open in Google Maps →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SOCIAL STRIP ── -->
+<div class="social-strip reveal">
+  <h3>Follow The Brotherhood</h3>
+  <p>Stay updated — new items, deals, and behind-the-scenes on our socials 📲</p>
+  <div class="social-icons">
+    <a class="social-icon insta" href="https://www.instagram.com/brotherzpk/" target="_blank" rel="noopener">
+      <svg class="si-svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      Instagram
+    </a>
+    <a class="social-icon tiktok" href="https://www.tiktok.com/@brotherzpk" target="_blank" rel="noopener">
+      <svg class="si-svg" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.19 8.19 0 004.84 1.56V6.78a4.85 4.85 0 01-1.07-.09z"/></svg>
+      TikTok
+    </a>
+    <a class="social-icon fb" href="https://www.facebook.com/share/1EHpfcXUan/" target="_blank" rel="noopener">
+      <svg class="si-svg" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      Facebook
+    </a>
+    <a class="social-icon" href="https://wa.me/923148884019" target="_blank" rel="noopener">
+      <svg class="si-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp
+    </a>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand-col">
+      <div class="brand">Brotherz</div>
+      <p>Okara's boldest fast food. Built on brotherhood, served with flavour. Every bite tells the story.</p>
+      <div class="foot-social">
+        <a class="fs" href="https://www.instagram.com/brotherzpk/" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+        <a class="fs" href="https://www.tiktok.com/@brotherzpk" target="_blank" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.19 8.19 0 004.84 1.56V6.78a4.85 4.85 0 01-1.07-.09z"/></svg></a>
+        <a class="fs" href="https://www.facebook.com/share/1EHpfcXUan/" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+        <a class="fs" href="https://wa.me/923148884019" target="_blank" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+      </div>
+    </div>
+    <div class="foot-col">
+      <h4>Menu</h4>
+      <ul>
+        <li><a href="#menu">Burgerz</a></li>
+        <li><a href="#sando">Signature Sando</a></li>
+        <li><a href="#menu">Wraps</a></li>
+        <li><a href="#menu">Pizza</a></li>
+        <li><a href="#menu">Pasta</a></li>
+        <li><a href="#wings">Wings & Sides</a></li>
+        <li><a href="#desserts">Desserts</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Order</h4>
+      <ul>
+        <li><a href="https://wa.me/923148884019" target="_blank">WhatsApp Order</a></li>
+        <li><a href="tel:+923148884018">Call 0314 8884018</a></li>
+        <li><a href="tel:+923148884019">Call 0314 8884019</a></li>
+        <li>Dine In</li>
+        <li>Takeaway</li>
+        <li>Free Delivery</li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Follow Us</h4>
+      <ul>
+        <li><a href="https://www.instagram.com/brotherzpk/" target="_blank">Instagram @brotherzpk</a></li>
+        <li><a href="https://www.tiktok.com/@brotherzpk" target="_blank">TikTok @brotherzpk</a></li>
+        <li><a href="https://www.facebook.com/share/1EHpfcXUan/" target="_blank">Facebook</a></li>
+        <li>Open Daily 12PM–1AM</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <p>© 2026 Brotherz · All Rights Reserved · Okara, Pakistan · Live Together, Eat Together</p>
+    <p>Made with 🔥 in Okara</p>
+  </div>
+</footer>
+
+<script>
+function toggleNav(){document.getElementById('mobNav').classList.toggle('open')}
+function switchTab(id,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+  document.getElementById('tp-'+id).classList.add('on');
+  btn.classList.add('on');
+}
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')})},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+document.addEventListener('click',e=>{if(!e.target.closest('nav')&&!e.target.closest('#mobNav'))document.getElementById('mobNav').classList.remove('open')});
+</script>
 </body>
 </html>
